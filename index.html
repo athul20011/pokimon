@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>movie fetch</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 p-3">
+                <h1 class="text-center text-dark">pokeman</h1>
+                <div class="d-flex p-4">
+                    <input id="input" type="text" class="form-control" placeholder="search a character">
+                    <input onclick="search()" type="button" class="btn btn-outline-dark ms-3" value="search">
+                </div>
+                <div id="result" class="p-4 m-2">
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</body>
+<script>
+    //function
+    function search(){
+        let pokeman=input.value
+        console.log(pokeman);
+        if(pokeman){
+         fetch(`https://pokeapi.co/api/v2/pokemon/${pokeman}`)
+         .then(data=>data.json())
+         .then(data=>{
+            let name = data.name
+            console.log(name);
+            let height = data.height
+            console.log(height);
+            let weight = data.weight
+            console.log(weight);
+            let type = data.type
+            console.log(type);
+
+            result.innerHTML = `<div class="card p-3 m-2 rounded-4">
+  <div class="body ">
+    <h5 class="card-title text-center">${name}</h5>
+  </div>
+    <p class="">height: ${height}</p>
+    <p class="">weight: ${weight}</p>
+    <p>type: ${type}</p>
+
+
+</div>`
+            
+         })
+        }
+        else{
+            alert('please enter a valid input')
+        }
+    }
+</script>
+</html>
